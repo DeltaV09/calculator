@@ -24,15 +24,13 @@ function divide (firstNumber, secondNumber) {
 }
 
 function percent (displayValue) {
-    firstNumber = parseInt(displayValue);
-    firstNumber /= 100;
-    return firstNumber.toString();
+    let percentValue = parseInt(displayValue)/100;
+    return percentValue.toString();
 }
 
 function plusMinus (displayValue) {
-    firstNumber = parseInt(displayValue);
-    firstNumber = 0 - firstNumber;
-    return firstNumber.toString();
+    let inverted = parseInt(displayValue)*-1;
+    return inverted.toString();
 }
 
 //choose which operation to perform
@@ -70,7 +68,7 @@ calculator.addEventListener("click",(event) => {
     display.textContent = displayValue;
 })
 
-function updateDisplay (operand) {
+function updateDisplay(operand) {
     if (displayValue === "0") {
         displayValue = operand;
     }
