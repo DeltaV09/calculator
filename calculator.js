@@ -1,4 +1,6 @@
 //calculator
+const display = document.getElementById('display')
+let displayValue = display.textContent;
 
 function add (firstNumber, secondNumber) {
     return firstNumber + secondNumber;
@@ -37,3 +39,17 @@ function operate (firstNumber, secondNumber, operator) {
             result = divide(firstNumber,secondNumber);
     }
 }
+
+calculator.addEventListener("click",(event) => {
+    let target = event.target;
+    if (target.classList.contains("operand")) {
+        if (displayValue == "0") {
+            displayValue = target.value;
+            display.textContent = displayValue;
+        }
+        else {
+            displayValue += target.value;
+            display.textContent = displayValue;
+        }
+    }
+})
