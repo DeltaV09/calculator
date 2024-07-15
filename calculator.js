@@ -20,7 +20,12 @@ function multiply (firstNumber, secondNumber) {
 }
 
 function divide (firstNumber, secondNumber) {
-    return firstNumber / secondNumber;
+    if (secondNumber === 0) {
+        return "Nice try";
+    }
+    else {
+        return firstNumber / secondNumber;
+    }
 }
 
 function percent (displayValue) {
@@ -39,13 +44,18 @@ function operate (firstNumber, secondNumber, operator) {
     switch (operator) {
         case "\+":
             result = add(firstNumber,secondNumber);
+            break;
         case "\-":
             result = subtract(firstNumber,secondNumber);
+            break;
         case "\*":
             result = multiply(firstNumber,secondNumber);
-        case "\\":
+            break;
+        case "\/":
             result = divide(firstNumber,secondNumber);
+            break;
     }
+    displayValue = result;
 }
 
 calculator.addEventListener("click",(event) => {
@@ -65,11 +75,14 @@ calculator.addEventListener("click",(event) => {
     else if (target.classList.contains("operator")) {
         updateOperator(target.value);
     }
+    else if (target.classList.contains("equals")) {
+        equals();
+    }
     display.textContent = displayValue;
 })
 
 function updateDisplay(operand) {
-    if (displayValue === "0") {
+    if (displayValue === "0" || displayValue === "Nice try") {
         displayValue = operand;
     }
     else if (firstNumber == displayValue && !startedSecondNumber) {
@@ -82,12 +95,20 @@ function updateDisplay(operand) {
 }
 
 function updateOperator(operator) {
-    if (!firstOperator) {
+    if (!startedSecondNumber) {
+        //set the first number and assign the operator to use
+        //also updates operator if firstNumber set but second number not started
         firstNumber = parseInt(displayValue);
         firstOperator = operator;
     }
-    else {
+    else if (startedSecondNumber){
+        //if operator already set & second number entered,
+        //perform previous operation and then set operator to new value
+        secondNumber = parseInt(displayValue);
         operate(firstNumber, secondNumber, firstOperator);
+        firstOperator = operator;
+        firstNumber = displayValue;
+        startedSecondNumber = false;
     }
 }
 
@@ -95,5 +116,16 @@ function clear() {
     displayValue = "0";
     firstNumber = null;
     secondNumber = null;
+    firstOperator = null;
     startedSecondNumber = false;
+}
+
+function equals() {
+    if(firstNumber && startedSecondNumber) {
+        secondNumber = parseInt(displayValue);
+        operate(firstNumber, secondNumber, firstOperator)
+        firstNumber = displayValue;
+        firstOperator = null;
+        startedSecondNumber = false;
+    }
 }
