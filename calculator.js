@@ -78,9 +78,9 @@ calculator.addEventListener("click",(event) => {
     else if (target.classList.contains("equals")) {
         equals();
     }
-    // else if (target.classList.contains("decimal")) {
-    //     addDecimal();
-    // }
+    else if (target.classList.contains("decimal")) {
+        addDecimal();
+    }
     display.textContent = displayValue;
 })
 
@@ -134,8 +134,8 @@ function equals() {
     }
 }
 
-// function addDecimal() {
-//     if(!displayValue.includes("\.")) {
-//         displayValue += "\.";
-//     }
-// }
+function addDecimal() {
+    if(!displayValue.includes("\.")) {
+        displayValue += "\.";
+    }
+}
