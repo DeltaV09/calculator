@@ -8,7 +8,7 @@ let secondOperator = null;
 let startedSecondNumber = false;
 
 function add (firstNumber, secondNumber) {
-    return firstNumber + secondNumber;
+    return parseFloat(firstNumber) + parseFloat(secondNumber);
 }
 
 function subtract (firstNumber, secondNumber) {
@@ -29,12 +29,12 @@ function divide (firstNumber, secondNumber) {
 }
 
 function percent (displayValue) {
-    let percentValue = parseInt(displayValue)/100;
+    let percentValue = displayValue/100;
     return percentValue.toString();
 }
 
 function plusMinus (displayValue) {
-    let inverted = parseInt(displayValue)*-1;
+    let inverted = displayValue*-1;
     return inverted.toString();
 }
 
@@ -78,6 +78,9 @@ calculator.addEventListener("click",(event) => {
     else if (target.classList.contains("equals")) {
         equals();
     }
+    // else if (target.classList.contains("decimal")) {
+    //     addDecimal();
+    // }
     display.textContent = displayValue;
 })
 
@@ -98,13 +101,13 @@ function updateOperator(operator) {
     if (!startedSecondNumber) {
         //set the first number and assign the operator to use
         //also updates operator if firstNumber set but second number not started
-        firstNumber = parseInt(displayValue);
+        firstNumber = displayValue;
         firstOperator = operator;
     }
     else if (startedSecondNumber){
         //if operator already set & second number entered,
         //perform previous operation and then set operator to new value
-        secondNumber = parseInt(displayValue);
+        secondNumber = displayValue;
         operate(firstNumber, secondNumber, firstOperator);
         firstOperator = operator;
         firstNumber = displayValue;
@@ -122,10 +125,17 @@ function clear() {
 
 function equals() {
     if(firstNumber && startedSecondNumber) {
-        secondNumber = parseInt(displayValue);
+        secondNumber = displayValue;
         operate(firstNumber, secondNumber, firstOperator)
         firstNumber = displayValue;
         firstOperator = null;
+        secondNumber = null;
         startedSecondNumber = false;
     }
 }
+
+// function addDecimal() {
+//     if(!displayValue.includes("\.")) {
+//         displayValue += "\.";
+//     }
+// }
