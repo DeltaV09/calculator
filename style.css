@@ -9,7 +9,7 @@ body {
 }
 
 #calculator {
-    background-color: darkgray;
+    background-color: lightgray;
     border: 0.2em solid black;
     border-radius: 0.2em;
     display: grid;
@@ -27,13 +27,32 @@ body {
     font-size: 5em;
     font-weight: 500;
     overflow: hidden;
+    background-color: whitesmoke;
 }
 
 button {
     font-size: 2em;
     margin: 0.1em;
+    border-radius: 0.3em;
 }
 
 #zero {
     grid-column: span 2;
+}
+
+.operator {
+    background-color: darkgray;
+}
+
+.clear {
+    background-color: rgb(214, 49, 49);
+}
+
+.operand {
+    background-color: rgb(52, 52, 52);
+    color: white;
+}
+
+.equals {
+    background-color: orange;
 }
