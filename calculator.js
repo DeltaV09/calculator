@@ -55,7 +55,7 @@ function operate (firstNumber, secondNumber, operator) {
             result = divide(firstNumber,secondNumber);
             break;
     }
-    displayValue = result;
+    displayValue = Math.round(result*10000)/10000;
 }
 
 calculator.addEventListener("click",(event) => {
@@ -88,9 +88,12 @@ function updateDisplay(operand) {
     if (displayValue === "0" || displayValue === "Nice try") {
         displayValue = operand;
     }
-    else if (firstNumber == displayValue && !startedSecondNumber) {
+    else if (firstNumber == displayValue && !startedSecondNumber && firstOperator!=null) {
         displayValue = operand;
         startedSecondNumber = true;
+    }
+    else if (firstNumber == displayValue && !startedSecondNumber && !firstOperator) {
+        displayValue = operand;
     }
     else {
         displayValue += operand;
@@ -124,6 +127,8 @@ function clear() {
 }
 
 function equals() {
+    //only run operation if user has entered two numbers
+    //then set result to firstNumber and reset everything else
     if(firstNumber && startedSecondNumber) {
         secondNumber = displayValue;
         operate(firstNumber, secondNumber, firstOperator)
@@ -135,6 +140,7 @@ function equals() {
 }
 
 function addDecimal() {
+    //only let user add a decimal if one is not already present
     if(!displayValue.includes("\.")) {
         displayValue += "\.";
     }
