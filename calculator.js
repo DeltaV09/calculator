@@ -145,3 +145,5 @@ function addDecimal() {
         displayValue += "\.";
     }
 }
+
+//testing new Linux installation
